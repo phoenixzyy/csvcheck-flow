@@ -65,3 +65,13 @@ Final local checks: check-manifest confirmed version-control and sdist file list
   update triggers CI; its outcome must be verified separately.
 - Prior authentication-blocked entries are historical. No deployment, paid
   resource, upstream message, Issue or PR was created.
+
+## Remote verification — 2026-11-17 (Asia/Shanghai)
+
+Verified commit: `2654fabeb812a86abfdbc3c028d64ff0e85ec062`.
+
+- [CI run 43916529346](https://github.com/phoenixzyy/csvcheck-flow/actions/runs/43916529346): all three Ubuntu jobs (Python 3.10, 3.12, 3.14) completed successfully. Each passed the full pytest suite, the synthetic installed-CLI Excel/CSV/SQLite smoke flow, stdin checks and pipe checks.
+- [Lint run 43916529369](https://github.com/phoenixzyy/csvcheck-flow/actions/runs/43916529369): check-manifest, flake8 and isort completed successfully.
+- [Publish run 43916529400](https://github.com/phoenixzyy/csvcheck-flow/actions/runs/43916529400) was skipped by the upstream-only guard. Codecov upload was skipped. No deployment or package publication was performed.
+- Fetched remote master and compared its full tree to local publication files: identical. Upstream parent of the feature commit is the pinned baseline.
+- Remaining limitations: Windows/macOS, PostgreSQL/MySQL and large-file performance remain unverified. JSONL only encodes check reports, not every fatal diagnostic. No known publication blocker remains.
