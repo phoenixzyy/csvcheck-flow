@@ -114,6 +114,37 @@ Output
 -  If the :code:`--omit-error-rows` option is set, **only** rows that pass the selected checks are written to standard output. If not, **all** rows are written to standard output.
 -  If any checks are enabled, **error** rows along with line numbers and descriptions are written to standard error. If there are error rows, the exit code is 1.
 
+JSON Lines reports (portfolio extension)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use ``--error-format jsonl`` to write one JSON object per check error to standard
+error. CSV remains the default; ``--error-format csv`` selects it explicitly.
+Standard output stays CSV and reported check errors still exit with status 1.
+No check errors means no report output and a successful exit.
+
+Each object contains ``line_number`` (integer), ``msg`` (string),
+``column_names`` (array) and ``row`` (array). Keeping headers and values in
+separate arrays preserves duplicate/empty column names and short/long rows.
+A nonempty ``--label`` adds a ``label`` string; ``--label -`` resolves to the
+input filename or ``stdin``. Unicode and embedded newlines are JSON-escaped.
+
+The arrays use the checker's header and error row, before output-only column
+removal; header normalization still applies. Line numbers keep the existing
+CSV report semantics: the CSV reader's ending physical line minus one, after
+skipped lines. Empty-column findings use the existing synthetic line 1 and a
+row of empty strings. ``--zero`` affects column suggestions, not line numbers.
+
+Only check errors are encoded. Argument, decoding, parser and I/O failures
+still produce ordinary diagnostics; standard error is not guaranteed to be
+JSON Lines on those failures. This does not enable checks automatically or
+change the checker's existing error buffering.
+
+.. code-block:: bash
+
+   csvclean --length-mismatch --error-format jsonl examples/bad.csv > cleaned.csv 2> errors.jsonl
+   # Exit 1 is expected for this fixture.
+   python -c 'import json; print([json.loads(line)["row"] for line in open("errors.jsonl")])'
+
 .. _csvclean-usage:
 
 Usage
@@ -141,6 +172,8 @@ Usage
                            Enable all error reporting.
      --omit-error-rows     Omit data rows that contain errors, from standard
                            output.
+     --error-format {csv,jsonl}
+                           Format check errors as CSV (default) or JSON Lines.
      --label LABEL         Add a "label" column to standard error. Useful in
                            automated workflows. Use "-" to default to the input
                            filename.

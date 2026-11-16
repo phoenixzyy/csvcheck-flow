@@ -1,3 +1,12 @@
+Portfolio extension (local work awaiting fork publication)
+=========================================================
+
+This is a derived work of `wireservice/csvkit <https://github.com/wireservice/csvkit>`_,
+not an original implementation of csvkit. The added feature is opt-in JSON Lines
+check reports for ``csvclean``. See `PORTFOLIO.md <PORTFOLIO.md>`_ for attribution,
+verification and limits, and `LEARNING.zh-CN.md <LEARNING.zh-CN.md>`_ for the Chinese
+learning guide. Upstream MIT copyright and author notices are retained.
+
 .. image:: https://github.com/wireservice/csvkit/workflows/CI/badge.svg
     :target: https://github.com/wireservice/csvkit/actions
     :alt: Build status

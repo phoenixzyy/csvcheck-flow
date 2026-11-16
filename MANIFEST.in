@@ -9,3 +9,5 @@ recursive-include man *.1
 recursive-include tests *.py
 exclude .readthedocs.yaml
 exclude Dockerfile
+include *.md
+recursive-include scripts *.py

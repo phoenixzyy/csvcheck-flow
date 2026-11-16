@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import json
 import sys
 
 import agate
@@ -25,6 +26,9 @@ class CSVClean(CSVKitUtility):
         self.argparser.add_argument(
             '--omit-error-rows', dest='omit_error_rows', action='store_true',
             help='Omit data rows that contain errors, from standard output.')
+        self.argparser.add_argument(
+            '--error-format', choices=('csv', 'jsonl'), default='csv',
+            help='Format check errors on standard error as CSV (default) or JSON Lines.')
         self.argparser.add_argument(
             '--label', dest='label',
             help='Add a "label" column to standard error. Useful in automated workflows. '
@@ -107,18 +111,30 @@ class CSVClean(CSVKitUtility):
             output_writer.writerow(row)
 
         if checker.errors:
-            error_writer = agate.csv.writer(self.error_file, **self.writer_kwargs)
+            if self.args.error_format == 'jsonl':
+                for error in checker.errors:
+                    record = {
+                        'line_number': error.line_number,
+                        'msg': error.msg,
+                        'column_names': checker.column_names,
+                        'row': error.row,
+                    }
+                    if self.args.label:
+                        record['label'] = label
+                    self.error_file.write(json.dumps(record) + '\n')
+            else:
+                error_writer = agate.csv.writer(self.error_file, **self.writer_kwargs)
 
-            fieldnames = ['line_number', 'msg'] + checker.column_names
-            if self.args.label:
-                fieldnames.insert(0, 'label')
-            error_writer.writerow(fieldnames)
-
-            for error in checker.errors:
-                row = [error.line_number, error.msg] + error.row
+                fieldnames = ['line_number', 'msg'] + checker.column_names
                 if self.args.label:
-                    row.insert(0, label)
-                error_writer.writerow(row)
+                    fieldnames.insert(0, 'label')
+                error_writer.writerow(fieldnames)
+
+                for error in checker.errors:
+                    row = [error.line_number, error.msg] + error.row
+                    if self.args.label:
+                        row.insert(0, label)
+                    error_writer.writerow(row)
 
             sys.exit(1)
 

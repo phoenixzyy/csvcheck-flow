@@ -2,6 +2,7 @@ name: Auto-merge
 on: pull_request_target
 jobs:
   automerge:
+    if: github.repository == 'wireservice/csvkit'
     uses: open-contracting/.github/.github/workflows/automerge.yml@main
     permissions:
       actions: write

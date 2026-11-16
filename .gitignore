@@ -7,3 +7,9 @@
 /csvkit.egg-info
 /docs/_build
 /man/.doctrees
+
+# Local verification environments
+.venv/
+.venv-wheel/
+.pytest_cache/
+.coverage

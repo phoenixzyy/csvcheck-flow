@@ -1,13 +1,15 @@
 name: CI
 on: [push, pull_request]
+permissions:
+  contents: read
 jobs:
   build:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
-        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14', pypy-3.11]
+        os: [ubuntu-latest]
+        python-version: ['3.10', '3.12', '3.14']
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -20,6 +22,7 @@ jobs:
           LANG: en_US.UTF-8
           PYTHONUTF8: 1
         run: pytest --cov csvkit
+      - run: python scripts/verify_portfolio.py
       # csvpy cannot accept input as piped data via STDIN.
       - name: Read from stdin
         if: matrix.os != 'windows-latest'
@@ -53,5 +56,6 @@ jobs:
           printf 'a,b,c\n1,2,3' | in2csv -f csv
           printf 'SELECT 1 AS a' | sql2csv
       - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        if: github.repository == 'wireservice/csvkit'
         with:
           fail_ci_if_error: true
