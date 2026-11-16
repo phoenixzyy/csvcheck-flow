@@ -1,6 +1,6 @@
 # csvcheck-flow 学习说明
 
-这是基于 wireservice/csvkit 的作品集增强，当前尚未发布 Fork。上游负责 CSV、Excel、SQL 工具主体；本次实际贡献是可选 JSON Lines 错误报告、13 项 CLI 回归用例、验证脚本及文档。不要把上游功能表述为自己从零开发。实现有 Codex 辅助，适合逐行复查、复现和讲解，不等于已经独立掌握全部代码。
+这是基于 wireservice/csvkit 的作品集增强，已发布为 [phoenixzyy/csvcheck-flow](https://github.com/phoenixzyy/csvcheck-flow)，保留正常 Fork 关系。上游负责 CSV、Excel、SQL 工具主体；本次实际贡献是可选 JSON Lines 错误报告、13 项 CLI 回归用例、验证脚本及文档。不要把上游功能表述为自己从零开发。实现有 Codex 辅助，适合逐行复查、复现和讲解，不等于已经独立掌握全部代码。
 
 ## 结构与执行过程
 
@@ -59,4 +59,4 @@ csvclean --length-mismatch --error-format jsonl examples/bad.csv > cleaned.csv 2
 4. 在单独分支比较错误量增大时的内存开销，用真实测量决定是否需要改 RowChecker。
 5. 用临时 SQLite 表设计“第二个文件失败时第一个文件是否回滚”的实验；区分 DML 与 DDL，不将结果直接推广到 PostgreSQL/MySQL。
 
-当前远端创建需要已验证的 phoenixzyy 登录会话。没有 Fork、推送或远端 CI 成功证据，不能将本项目描述成已经发布。没有部署、购买服务、联系上游或修改其他候选项目。
+远端 Fork 已通过 phoenixzyy 登录会话创建，功能提交为 `65eb3941c251bb60a751e72f0c33ff12c27d05e4`，远端 Git tree 与本地验证版本一致。CI 结果见 Actions 和进度文件，不能将本地测试结果冒充远端 CI 结果。没有部署、购买服务、联系上游或修改其他候选项目。

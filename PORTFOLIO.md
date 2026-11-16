@@ -1,15 +1,16 @@
-# csvcheck-flow — proposed portfolio fork
+# csvcheck-flow — csvkit portfolio fork
 
-Publication is pending authentication. No remote fork has been created, no commit
-has been pushed, and remote CI has not run. The proposed GitHub repository name
-is `csvcheck-flow` under the verified account `phoenixzyy` (ID 7067843).
+Published at [phoenixzyy/csvcheck-flow](https://github.com/phoenixzyy/csvcheck-flow),
+a normal GitHub fork of wireservice/csvkit owned by phoenixzyy (ID 7067843).
+The feature commit is `65eb3941c251bb60a751e72f0c33ff12c27d05e4`; its Git tree
+exactly matches locally tested commit `2f06e287ddb8d9d0b2e32c53d1f47c750fefd27a`.
+See [Actions](https://github.com/phoenixzyy/csvcheck-flow/actions) for current remote checks.
 
 ## Origin and actual contribution
 
 This project derives from [wireservice/csvkit](https://github.com/wireservice/csvkit),
 fixed at `43d09bf1f39382bc2d66c4f892c9814901179ff8` for this review on 2026-11-16.
-The full upstream Git history is retained locally. Normal GitHub Fork creation,
-with that upstream relationship, is required before publication.
+Upstream Git history and the normal GitHub fork relationship are preserved.
 
 The CSV/Excel conversion, cleaning engine, SQL import and CLI framework are
 upstream work. `COPYING` retains the MIT license and copyright (2016 Christopher
@@ -98,8 +99,9 @@ upstream synthetic line 1. The report reflects checker headers/errors before
 output-only column removal; header normalization still applies. No machine-stable
 error codes or structured empty-column indices are introduced.
 
-Only local Linux/Python 3.12 results are verified. Windows/macOS, other Python
-versions, PostgreSQL/MySQL, large-file throughput and remote CI are unverified.
+The local results above were verified on Linux/Python 3.12. Windows/macOS, other Python
+versions, PostgreSQL/MySQL and large-file throughput are outside local validation.
+Remote CI results are recorded separately in PORTFOLIO_PROGRESS.md and Actions.
 This version retains the upstream distribution name/version for local testing;
 it must not be published to PyPI as a new upstream release.
 

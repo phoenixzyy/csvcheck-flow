@@ -52,3 +52,16 @@ verify owner ID and parent relationship, push the reviewed commit without force,
 then verify the remote SHA and CI. Do not create any other candidate or deploy.
 
 Final local checks: check-manifest confirmed version-control and sdist file lists match; installed CLI smoke rerun passed. No remote action has occurred.
+
+## Publication checkpoint — 2026-11-17 (Asia/Shanghai)
+
+- Browser login verified as phoenixzyy; connector confirms owner ID 7067843.
+- Normal public Fork created: https://github.com/phoenixzyy/csvcheck-flow
+  GitHub displays “forked from wireservice/csvkit”; all three upstream branches copied.
+- Feature commit published through the GitHub connector: 65eb3941c251bb60a751e72f0c33ff12c27d05e4.
+  Tree 8ba0c65501b8d40b2fa01fa7708f7cb588d245be exactly matches tested local commit 2f06e287ddb8d9d0b2e32c53d1f47c750fefd27a.
+  Fetched the public remote to verify this independently. No force update.
+- Fork Actions enabled after publishing the guarded workflows. This documentation
+  update triggers CI; its outcome must be verified separately.
+- Prior authentication-blocked entries are historical. No deployment, paid
+  resource, upstream message, Issue or PR was created.

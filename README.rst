@@ -1,5 +1,5 @@
-Portfolio extension (local work awaiting fork publication)
-=========================================================
+csvcheck-flow: csvkit portfolio extension
+========================================
 
 This is a derived work of `wireservice/csvkit <https://github.com/wireservice/csvkit>`_,
 not an original implementation of csvkit. The added feature is opt-in JSON Lines
